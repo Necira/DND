@@ -1,4 +1,4 @@
-Die Aufgabe :computer:
+Hier ist mein Bearbeitungsprozess meiner potenziellen Abgabe im Fach Programmierung :computer:
 | Gegeben ist dies :grin: |
 | ------- |
 **Aufgabe Kg A12:** In dieser Aufgabe sollst du ein Kampf zwischen verschiedenen Charakteren simulieren, basierend auf dem D&D-Regelwerk (sehr vereinfacht). Am Anfang können 2 Spieler jeweils einen Charakter auswählen (Krieger, Magier oder Schurke). Danach kämpfen diese abwechselt solange gegeneinander, bis 1 Spieler keine Lebenspunkte mehr besitzt. Danach wird eine Nachricht angezeigt welcher Spieler gewonnen hat. Es fängt der Spieler an, der die höhere Initiative „würfelt". Die Klassen besitzen folgende Werte bzw. Fähigkeiten (funktionen!):

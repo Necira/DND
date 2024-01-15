@@ -32,7 +32,7 @@ export default class Rogue extends Character {
        
     dagger(player) {
         let mirror_luck = dice(1,2);
-        if (player.mirror === true && mirror_luck >=2) {
+        if (player.mirror === true && mirror_luck >= 2) {
             this.damage = 0;
             this.fireball_damage = 0;
         } else {
@@ -47,7 +47,7 @@ export default class Rogue extends Character {
                 this.damage = 0;
             }
             player.hp -= Math.floor(this.damage);
-            this.hp -= this.fireball_damage;
+            this.hp -= this.fireball_damage; 
         }
         this.fireball_damage = 0;
         document.getElementById("sneaky_commentary").innerHTML = "";
