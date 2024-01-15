@@ -8,6 +8,9 @@ export class History {
     }
     get_history() {
         this.player_list = JSON.parse(localStorage.getItem("history_list"));
+        if (this.player_list === null) {
+            this.player_list = [];
+        }
         if (this.player_list.length > 0) {
         let list = document.getElementById("history");
         for (let entry = 0; entry < this.player_list.length; entry++) {
