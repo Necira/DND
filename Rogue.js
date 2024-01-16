@@ -3,8 +3,8 @@ import Character from "./Character.js";
 
 export default class Rogue extends Character {
     sneaky;
-    dagger;
     dirt;
+    type; 
     
     constructor() {
     super();
@@ -14,6 +14,7 @@ export default class Rogue extends Character {
     this.sneaky = false;
     this.damage = 0;
     this.fireball_damage = 0;
+    this.type = "rogue";
     }
 
     sneak_attack() {
@@ -22,7 +23,7 @@ export default class Rogue extends Character {
         let unlucky = "sneak attack failed, you're blind";
         document.getElementById("sneaky_commentary").innerHTML = message;
         if (this.dirt === true) {
-            sneaky = false;
+            this.sneaky = false;
             document.getElementById("sneaky_commentary").innerHTML = unlucky
         }   
         this.dirt = false;

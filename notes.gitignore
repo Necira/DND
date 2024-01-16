@@ -1,13 +1,15 @@
 Postend To-do list
-    1. aktive spieler --> felder nacheinander blockieren
+    # DONE 1. aktive spieler --> felder nacheinander blockieren
     2. JEDEN Status anzeigen lassen
-    3. Ästhetik (CSS strukturiert und angenehm) ggf. nach grafiken erkundigen
+    - never ending - Ästhetik (CSS strukturiert und angenehm) ggf. nach grafiken erkundigen
     (4. Character customization oder Auswahl an Charakteren --> unterkategorien der klasse)
     5. Highscore
     6. Codestruktur zusammenfassen und verbessern
     7. Levelaufstieg durch Erfahrungspunkte
-    8. Stetig Bugs kontrollieren und Spieletesten ^^
-    DONE 9. Spieler Namen eingeben lassen 
-    DONE 10. potion darf nur einmal aktiv werden!
+    - never ending - Stetig Bugs kontrollieren und Spieletesten ^^
+    # DONE 9. Spieler Namen eingeben lassen 
+    # DONE 10. potion darf nur einmal aktiv werden!
+    # DONE 11. Hover: beschreibung der fähigkeiten und Klassen ausklappen
+    12. Rüstungsklasse (werde wahrscheinlich meinen Code komplett umwerfen müssen dafür)
     ----
-    (8. endgoal vue framework in 100 Jahren)
+    (endgoal vue framework in 100 Jahren)

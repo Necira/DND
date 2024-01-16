@@ -11,6 +11,7 @@ export class Game {
     player_two;
     result_initiative;
     local_storage;
+    active_player;
 
     constructor() {
         this.local_storage = new History();
@@ -19,13 +20,13 @@ export class Game {
         document.getElementById("name1").addEventListener("keyup", () => {
             const name = document.getElementById("name1").value;
             this.player_one.set_name(name);
-            document.getElementById("ability_p1").innerHTML = this.player_one.name;
+            document.getElementById("ability_p1_name").innerHTML = this.player_one.name;
             document.getElementById("p1_initiative").innerHTML = this.player_one.name;
         });
         document.getElementById("name2").addEventListener("keyup", () => {
             const name = document.getElementById("name2").value;
             this.player_two.set_name(name);
-            document.getElementById("ability_p2").innerHTML = this.player_two.name;
+            document.getElementById("ability_p2_name").innerHTML = this.player_two.name;
             document.getElementById("p2_initiative").innerHTML = this.player_two.name;
         });
         document.getElementById("round").innerHTML = this.round;
@@ -55,40 +56,45 @@ export class Game {
             this.show_ini("player_two");
         })
         this.round = new Counter(this.player_one,this.player_two,this.local_storage);
-    
+    //nächstes mal, elementsbyclassname bei selben funktionen vlt 
         document.getElementById("p1_sneak_attack").addEventListener("click", () => {
+            this.activate_player();
             this.player_one.sneak_attack();
             this.mirror_true();
             this.hp_stat();
             this.round.turnbased();
         });
         document.getElementById("p1_dagger").addEventListener("click", () => {
-            console.log(this.player_one)
+            this.activate_player();
             this.player_one.dagger(this.player_two);
             this.mirror_true();
             this.hp_stat();
             this.round.turnbased();
         });
         document.getElementById("p1_dirt").addEventListener("click", () => {
-            this.player_two.dirty(this.player_two);
+            this.activate_player();
+            this.player_one.dirty(this.player_two);
             this.mirror_true();
             this.hp_stat();
             this.round.turnbased();
         });
         document.getElementById("p1_rogue_potion").addEventListener("click", () => {
             this.player_one.potion();
+            this.activate_player();
             document.getElementById("p1_rogue_potion").style.visibility = "hidden";
             this.mirror_true();
             this.hp_stat();
             this.round.turnbased();
         });
         document.getElementById("p1_fireball").addEventListener("click", () => {
+            this.activate_player();
             this.player_one.fireball(this.player_two);
             this.mirror_true();
             this.hp_stat();
-            this.round.turnbased();
+            this.round.turnbased();  
         });
         document.getElementById("p1_magic_missile").addEventListener("click", () => {
+            this.activate_player();
             this.player_one.magic_missile(this.player_two);
             this.mirror_true();
             this.hp_stat();
@@ -96,31 +102,37 @@ export class Game {
         });
         document.getElementById("p1_mage_potion").addEventListener("click", () => {
             this.player_one.potion();
+            this.activate_player();
             document.getElementById("p1_mage_potion").style.visibility = "hidden";
             this.mirror_true();
             this.hp_stat();
             this.round.turnbased();
         });
         document.getElementById("p1_sword").addEventListener("click", () => {
+            this.activate_player();
             this.player_one.sword(this.player_two);
             this.mirror_true();
             this.hp_stat();
             this.round.turnbased();
         });
         document.getElementById("p1_shield_block").addEventListener("click", () => {
-            this.player_two.shield_block();
+            this.activate_player();
+            this.player_one.shield_block();
             this.mirror_true();
             this.hp_stat();
             this.round.turnbased();
+            
         });
         document.getElementById("p1_warrior_potion").addEventListener("click", () => {
             this.player_one.potion();
+            this.activate_player();
             document.getElementById("p1_warrior_potion").style.visibility = "hidden";
             this.mirror_true();
             this.hp_stat();
             this.round.turnbased();
         });
         document.getElementById("p1_mirrors").addEventListener("click", () => {
+            this.activate_player();
             this.player_one.mirrors();
             this.mirror_true();
             this.hp_stat();
@@ -128,48 +140,56 @@ export class Game {
         });
         document.getElementById("p2_rogue_potion").addEventListener("click", () => {
             this.player_two.potion();
+            this.activate_player();
             document.getElementById("p2_rogue_potion").style.visibility = "hidden";
             this.mirror_true();
             this.hp_stat();
             this.round.turnbased();
         });
         document.getElementById("p2_sneak_attack").addEventListener("click", () => {
+            this.activate_player();
             this.player_two.sneak_attack();
             this.mirror_true();
             this.hp_stat();
             this.round.turnbased();
         });
         document.getElementById("p2_dagger").addEventListener("click", () => {
+            this.activate_player();
             this.player_two.dagger(this.player_one);
             this.mirror_true();
             this.hp_stat();
             this.round.turnbased();
         });
         document.getElementById("p2_mirrors").addEventListener("click", () => {
+            this.activate_player();
             this.mirror_true();
             this.player_two.mirrors();
             this.hp_stat();
             this.round.turnbased();
         });
         document.getElementById("p2_dirt").addEventListener("click", () => {
-            this.player_one.dirty(this.player_one);
+            this.activate_player();
+            this.player_two.dirty(this.player_one);
             this.mirror_true();
             this.hp_stat();
             this.round.turnbased();
         });
         document.getElementById("p2_mage_potion").addEventListener("click", () => {
             this.player_two.potion();
+            this.activate_player();
             document.getElementById("p2_mage_potion").style.visibility = "hidden";
             this.mirror_true();
             this.hp_stat();
             this.round.turnbased();
         });
         document.getElementById("p2_fireball").addEventListener("click", () => {
+            this.activate_player();
             this.player_two.fireball(this.player_one);
             this.hp_stat();
             this.round.turnbased();
         });
         document.getElementById("p2_magic_missile").addEventListener("click", () => {
+            this.activate_player();
             this.player_two.magic_missile(this.player_one);
             this.mirror_true();
             this.hp_stat();
@@ -177,29 +197,28 @@ export class Game {
         })
 
         document.getElementById("p2_sword").addEventListener("click", () => {
+            this.activate_player();
             this.player_two.sword(this.player_one);
             this.mirror_true();
             this.hp_stat();
             this.round.turnbased();
+            
         });
         document.getElementById("p2_shield_block").addEventListener("click", () => {
-            this.player_one.shield_block();
+            this.activate_player();
+            this.player_two.shield_block();
             this.mirror_true();
             this.hp_stat();
             this.round.turnbased();
+            
         });
         document.getElementById("p2_warrior_potion").addEventListener("click", () => {
             this.player_two.potion();
+            this.activate_player();
             document.getElementById("p2_warrior_potion").style.visibility = "hidden";
             this.mirror_true();
             this.hp_stat();
-            this.round.turnbased();
-        });
-            document.getElementById("p1_sneak_attack").addEventListener("click", () => {
-            this.player_one.sneak_attack(this.player_two);
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
+            this.round.turnbased(); 
         });
         document.getElementById("replay").addEventListener("click", () => {
             location.reload();
@@ -261,6 +280,7 @@ export class Game {
             let show_player_one_hp = this.player_one.hp;
             document.getElementById("show_player_one_hp").innerHTML = show_player_one_hp;
         }
+
         if (player === "2") {
             if (player_class === "rogue") {
                 this.player_two = new Rogue();
@@ -273,37 +293,56 @@ export class Game {
             else if (player_class === "warrior") {
                 this.player_two = new Warrior();
             }
-        this.round.player_two = this.player_two;
-        let show_player_two_hp = this.player_two.hp;
-        document.getElementById("show_player_two_hp").innerHTML = show_player_two_hp;
-        const initiative_div = document.getElementsByClassName("initiative");
+            this.round.player_two = this.player_two;
+            let show_player_two_hp = this.player_two.hp;
+            document.getElementById("show_player_two_hp").innerHTML = show_player_two_hp;
+            const initiative_div = document.getElementsByClassName("initiative");
             for (let current_element of initiative_div) {
                 current_element.style.visibility = "visible";
             } 
-        const round_div = document.getElementsByClassName("round");
+            const round_div = document.getElementsByClassName("round");
             for (let current_element of round_div) {
                 current_element.style.visibility = "visible";
             } 
-        const stat_div = document.getElementsByClassName("stats");
+            const stat_div = document.getElementsByClassName("stats");
             for (let current_element of stat_div) {
                 current_element.style.visibility = "visible";
             } 
         }
-       
     }
     show_ini(player) {
+        let ability_one_player = `ability_p1_${this.player_one.type}`;
+        let ability_two_player = `ability_p2_${this.player_two.type}`;
         if (player === "player_one") {
-        document.getElementById("player_one_ini_result").innerHTML = this.player_one.initiative;
+            document.getElementById("player_one_ini_result").innerHTML = this.player_one.initiative;
         }
         else if (player === "player_two") {
-        document.getElementById("player_two_ini_result").innerHTML = this.player_two.initiative;
-        this.first_strike();
+            document.getElementById("player_two_ini_result").innerHTML = this.player_two.initiative;
+            this.first_strike();
+            if (this.player_two.initiative < this.player_one.initiative) {
+                document.getElementById("p2_sneak_attack").style.display = "none";
+                this.active_player = this.player_one;
+                document.getElementById(ability_two_player).style.display = "none";
+            }
+            if (this.player_two.initiative > this.player_one.initiative) {
+                document.getElementById("p1_sneak_attack").style.display = "none";
+                this.active_player = this.player_two;
+                document.getElementById(ability_one_player).style.display = "none";
+            }
         }
-        if (this.player_two.initiative < this.player_one.initiative) {
-        document.getElementById("p2_sneak_attack").style.display = "none";
-        }
-        if (this.player_two.initiative > this.player_one.initiative) {
-        document.getElementById("p1_sneak_attack").style.display = "none";
+    }
+
+    activate_player() {
+        let ability_one_player = `ability_p1_${this.player_one.type}`;
+        let ability_two_player = `ability_p2_${this.player_two.type}`;
+        if (this.active_player === this.player_one) {
+            document.getElementById(ability_one_player).style.display = "none";
+            document.getElementById(ability_two_player).style.display = "";
+            this.active_player = this.player_two;
+        } else {
+            document.getElementById(ability_one_player).style.display = "";
+            document.getElementById(ability_two_player).style.display = "none";
+            this.active_player = this.player_one;
         }
     }
     

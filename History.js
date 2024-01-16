@@ -12,14 +12,14 @@ export class History {
             this.player_list = [];
         }
         if (this.player_list.length > 0) {
-        let list = document.getElementById("history");
-        for (let entry = 0; entry < this.player_list.length; entry++) {
-            let li = document.createElement("li");
-            li.appendChild(document.createTextNode(this.player_list[entry]));
-            list.appendChild(li);
+            let list = document.getElementById("history");
+            for (let entry = 0; entry < this.player_list.length; entry++) {
+                let li = document.createElement("li");
+                li.appendChild(document.createTextNode(this.player_list[entry]));
+                list.appendChild(li);
+            }
         }
     }
-}
     
     set_history(player) {
         this.player_list.push(player.name);

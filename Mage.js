@@ -3,9 +3,9 @@ import Character from "./Character.js";
 
 export default class Mage extends Character { 
     fireballs;
-    potion;
     mirror;
     mirror_turn;
+    type;
     constructor() {
         super();
         this.hp = dice(1,6);
@@ -14,6 +14,7 @@ export default class Mage extends Character {
         this.fireball_damage = 0;
         this.mirror = false;
         this.mirror_turn = 0;
+        this.type = "mage";
    }
 
     fireball(player) {

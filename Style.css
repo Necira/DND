@@ -6,9 +6,11 @@
 
 .ability_p1,.ability_p2 {
     margin: 30px;
-    display:flex;
+    display: flex;
 }
-
+.choose_initiative_style {
+    display: flex;
+}
 .chose_fighter {
     text-align:center;
 }
@@ -27,6 +29,7 @@
     text-align: center;
     font-display: center;
     font-size:15px;
+    visibility: hidden;
 }
 .player_one_initiative {
     font-size: 20px;
@@ -60,44 +63,126 @@
 
 .fighter1 {
     background-color: brown;
-    border-color:green;
-    border-radius:30%;
-    color:white;
+    border-color: green;
+    border-radius: 30%;
+    color: white;
 }
 
-.fighter2{
+.fighter2 {
     border-color: brown;
-    border-radius:30%;
+    border-radius: 30%;
     background: green;
-    color:white
+    color: white
 }
-.fighter1:hover {opacity: 1;
+.fighter1:hover {
+    opacity: 1;
     cursor: pointer;
-    border-color:brown;
+    border-color: brown;
     transform: scale();
 }
 
-.fighter2:hover {opacity: 1;
+.fighter2:hover {
+    opacity: 50;
     cursor: pointer;
-    border-color:green;
+    border-color: green;
     transform: scale();
 }
 
-#show_starting_player{
-    size:20px;
-    color:brown;
+#player_one_ini_button:hover {
+    opacity: 1;
+    cursor: pointer;
+    transform: scale();
 }
 
-.ability_p1{
-     color:brown;
-     border-color:brown;
+#player_two_ini_button:hover {
+    opacity: 1;
+    cursor: pointer;
+    transform: scale();
 }
 
-.ability_p2{
-    color:green;
-    border-color:green
+#show_starting_player {
+    size: 20px;
+    color: brown;
 }
 
-.p1_hp{
+.ability_p1 {
+     color: brown;
+     border-color: brown;
+}
+
+.ability_p2 {
+    color: green;
+    border-color: green
+}
+
+.p1_hp {
     color:red;
 }
+
+.p1_classpick, .p2_classpick {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+.information_text {
+    display: none;
+    margin: 5px;
+}
+
+.choose_initiative_style:has(#id_rogue_button1:hover, #id_rogue_button2:hover) + .information #rogue_information {
+    display: initial;
+}
+
+.choose_initiative_style:has(#id_mage_button1:hover, #id_mage_button2:hover) + .information #mage_information {
+    display: initial;
+}
+
+.choose_initiative_style:has(#id_warrior_button1:hover, #id_warrior_button2:hover ) + .information #warrior_information {
+    display: initial;
+}
+
+.body:has(#p1_sneak_attack:hover, #p2_sneak_attack:hover) #sneak_attack_information {
+    display: initial;
+}
+
+.body:has(#p1_dagger:hover, #p2_dagger:hover) #dagger_information {
+    display: initial;
+}
+
+.body:has(#p1_dirt:hover, #p2_dirt:hover) #dirt_information {
+    display: initial;
+}
+
+.body:has(#p1_rogue_potion:hover, #p2_rogue_potion:hover) #potion_rogue_information {
+    display: initial;
+}
+
+.body:has(#p1_fireball:hover, #p2_fireball:hover) #fireball_information {
+    display: initial;
+}
+
+.body:has(#p1_magic_missile:hover, #p2_magic_missile:hover) #magic_missile_information {
+    display: initial;
+}
+
+.body:has(#p1_mirrors:hover, #p2_mirrors:hover) #mirrors_information {
+    display: initial;
+}
+
+.body:has(#p1_mage_potion:hover, #p2_mage_potion:hover) #potion_mage_information {
+    display: initial;
+}
+
+.body:has(#p1_sword:hover, #p2_sword:hover) #sword_information {
+    display: initial;
+}
+
+.body:has(#p1_shield_block:hover, #p2_shield_block:hover) #shield_block_information {
+    display: initial;
+}
+
+.body:has(#p1_warrior_potion:hover, #p2_warrior_potion:hover) #potion_warrior_information {
+    display: initial;
+}
+

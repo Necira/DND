@@ -3,6 +3,7 @@ import Character from "./Character.js";
 
 export default class Warrior extends Character {
     block;
+    type;
     
     constructor() {
         super();
@@ -13,6 +14,7 @@ export default class Warrior extends Character {
         this.dirt = false;
         this.damage = 0;
         this.fireball_damage = 0;
+        this.type = "warrior";
     }
     
     sword(player) {
