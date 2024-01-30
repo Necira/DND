@@ -11,12 +11,9 @@
 </script>
 </head>
 <body class="body">
-        <div class="choose_fighter">
-            <ol id="history">
-                <li>History</li>
-            </ol>
-            <h1>Choose your fighter</h1>
-            <div class="choose_initiative_style">
+    <div class="choose_fighter">
+        <h1>Choose your fighter</h1>
+        <div class="choose_initiative_style">
             <div class="p1_classpick">
                 <p>Player One</p>
                 <img src="./pictures/rogue_icon.jpeg" height="50" id="id_rogue_button1" class="fighter1">
@@ -27,7 +24,6 @@
                 <p>warrior</p>
                 <input id="name1" value="enter name" style="visibility: hidden"> 
             </div>
-            
             <div class="p2_classpick">
                 <p id="player_one_pick"></p>
                 <p>Player Two</p>
@@ -96,7 +92,7 @@
             </div>
         </div>
             <div class="initiative">
-                <h2>Roll for initiative</h2>
+                <p>Roll for initiative</p>
                 <div class="player_one_initiative">
                     <p id="p1_initiative"></p>
                     <img src="./pictures/dice.webp" height="50" id="player_one_ini_button">
@@ -108,72 +104,82 @@
                     <p id="player_two_ini_result"></p>
                 </div>
             <p id="show_starting_player"></p>
+            </div>
         </div>
-    </div>
     <div class="round" style="visibility: hidden">
         <h3>Round</h3>
         <div id="round"></div>
         <p id="commentary">Get Ready</p>
         <marquee id="announcement" direction="right" scrollamount="30"></marquee>
-        <p id="dirty_commentary_visibility"></p> 
-        <p id="dirty_commentary"></p>
-        <p id="sneaky_commentary_visibility"></p>
-        <p id="sneaky_commentary"></p>
-    </div>
-    <p id="ability_p1_name"></p>
-    <div class="abilities">
-        <div class="ability_p1">
-            <div id="ability_p1_rogue">
-                <img src="./pictures/rogue_icon.jpeg" height="50">
-                <input type="button" value="sneak attack" id="p1_sneak_attack" class="ability" >
-                <input type="button" value="dagger" id="p1_dagger" class="ability">
-                <input type="button" value="dirt" id="p1_dirt" class="ability">
-                <input type="button" value="potion" id="p1_rogue_potion" class="ability" >
-            </div>
-            <div id="ability_p1_mage">
-                <img src="./pictures/mage_icon.webp" height="50">
-                <input type="button" value="fireball" id="p1_fireball" class="ability">
-                <input type="button" value="magic missile" id="p1_magic_missile" class="ability">
-                <input type="button" value="mirrors" id="p1_mirrors" class="ability">
-                <input type="button" value="potion" id="p1_mage_potion" class="ability">
-            </div>
-            <div id="ability_p1_warrior">
-                <img src="./pictures/warrior_icon.png" height="50">
-                <input type="button" value="sword" id="p1_sword" class="ability">
-                <input type="button" value="shield block" id="p1_shield_block" class="ability">
-                <input type="button" value="potion" id="p1_warrior_potion" class="ability">
+            <div id="commentary1">
+                <p id="dirty_commentary_player_one"></p>
+                <p id="sneaky_commentary_player_one"></p>
+                <p id="mirrors_commentary_player_one"></p>
+                <p id="shieldblock_commentary_player_one"></p>
+                <p id="potion_commentary_player_one"></p>
+                <p id="feedback_player_one"></p>
+                <p id="fireball_commentary_player_one"></p>
             </div>
         </div>
-    </div>
-        <p id="sneaky_commentary_visibility2"></p>
-        <p id="sneaky_commentary2"></p>
-        <p id="dirty_commentary_visibility2"></p>
-        <p id="dirty_commentary2"></p>
+        <p id="ability_p1_name"></p>
+        <div class="abilities">
+            <div class="ability_p1">
+                <div id="ability_p1_rogue">
+                    <img src="./pictures/rogue_icon.jpeg" height="50">
+                    <input type="button" value="sneak attack" id="p1_sneak_attack" class="ability" >
+                    <input type="button" value="dagger" id="p1_dagger" class="ability">
+                    <input type="button" value="dirt" id="p1_dirt" class="ability">
+                    <input type="button" value="potion" id="p1_rogue_potion" class="ability" >
+                </div>
+                <div id="ability_p1_mage">
+                    <img src="./pictures/mage_icon.webp" height="50">
+                    <input type="button" value="fireball" id="p1_fireball" class="ability">
+                    <input type="button" value="magic missile" id="p1_magic_missile" class="ability">
+                    <input type="button" value="mirrors" id="p1_mirrors" class="ability">
+                    <input type="button" value="potion" id="p1_mage_potion" class="ability">
+                </div>
+                <div id="ability_p1_warrior">
+                    <img src="./pictures/warrior_icon.png" height="50">
+                    <input type="button" value="sword" id="p1_sword" class="ability">
+                    <input type="button" value="shield block" id="p1_shield_block" class="ability">
+                    <input type="button" value="potion" id="p1_warrior_potion" class="ability">
+                </div>
+            </div>
+        </div>
+        <div id="commentary2">
+            <p id="sneaky_commentary_player_two"></p>
+            <p id="dirty_commentary_player_two"></p>
+            <p id="mirrors_commentary_player_two"></p>
+            <p id="shieldblock_commentary_player_two"></p>
+            <p id="potion_commentary_player_two"></p>
+            <p id="feedback_player_two"></p>
+            <p id="fireball_commentary_player_two"></p>
+        </div>
         <p id="ability_p2_name"></p>
         <div class="ability_p2">
             <div id="ability_p2_rogue">
                 <img src="./pictures/rogue_icon.jpeg" height="50">
-                <input type="button" value="sneak attack" id="p2_sneak_attack" >
-                <input type="button" value="dagger" id="p2_dagger">
-                <input type="button" value="dirt" id="p2_dirt">
-                <input type="button" value="potion" id="p2_rogue_potion" >
+                <input type="button" value="sneak attack" id="p2_sneak_attack" class="ability">
+                <input type="button" value="dagger" id="p2_dagger" class="ability">
+                <input type="button" value="dirt" id="p2_dirt" class="ability">
+                <input type="button" value="potion" id="p2_rogue_potion" class="ability">
             </div>
             <div id="ability_p2_mage">
-                <img src="./pictures/mage_icon.webp" height="50">
-                <input type="button" value="fireball" id="p2_fireball">
-                <input type="button" value="magic missile" id="p2_magic_missile">
-                <input type="button" value="mirrors" id="p2_mirrors">
-                <input type="button" value="potion" id="p2_mage_potion" >
+                <img src="./pictures/mage_icon.webp" height="50" class="ability">
+                <input type="button" value="fireball" id="p2_fireball" class="ability">
+                <input type="button" value="magic missile" id="p2_magic_missile" class="ability">
+                <input type="button" value="mirrors" id="p2_mirrors" class="ability">
+                <input type="button" value="potion" id="p2_mage_potion" class="ability">
             </div>
             <div id="ability_p2_warrior">
-                <img src="./pictures/warrior_icon.png" height="50">
-                <input type="button" value="sword" id="p2_sword">
-                <input type="button" value="shield block" id="p2_shield_block">
-                <input type="button" value="potion" id="p2_warrior_potion">
+                <img src="./pictures/warrior_icon.png" height="50" class="ability">
+                <input type="button" value="sword" id="p2_sword" class="ability">
+                <input type="button" value="shield block" id="p2_shield_block" class="ability">
+                <input type="button" value="potion" id="p2_warrior_potion" class="ability">
             </div>        
         </div>
     </div>
-    <div class="stats" style="visibility: hidden">
+    <div class="stats">
         <h6>HP</h6>
         <div class="p1_hp">
             <p>Player one HP</p>
@@ -185,5 +191,8 @@
             <input type="button" id="replay" value="replay">
         </div>
     </div>
+    <ol id="history">
+        <li>History</li>
+    </ol>
 </body>
 </html>

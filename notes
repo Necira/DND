@@ -1,0 +1,15 @@
+Postend To-do list ideas
+    2. JEDEN Status anzeigen lassen
+    3. Character customization oder Auswahl an Charakteren --> unterkategorien der klasse
+    4. Highscore
+    5. Levelaufstieg durch Erfahrungspunkte
+    6. Rüstungsklasse (werde wahrscheinlich meinen Code komplett umwerfen müssen dafür)
+    - never ending - Ästhetik (CSS strukturiert und angenehm) ggf. nach grafiken erkundigen
+    - never ending -  Codestruktur zusammenfassen und verbessern
+    - never ending - Stetig Bugs kontrollieren und Spieletesten ^^
+    # DONE aktive spieler --> felder nacheinander blockieren
+    # DONE  Spieler Namen eingeben lassen 
+    # DONE  potion darf nur einmal aktiv werden!
+    # DONE  Hover: Beschreibung der Fähigkeiten und Klassen ausklappen
+    ----
+    (endgoal vue framework in 100 Jahren)

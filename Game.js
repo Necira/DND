@@ -3,6 +3,8 @@ import Rogue from "./Rogue.js";
 import Mage from "./Mage.js";
 import { Counter } from "./Counter.js";
 import { History } from "./History.js";
+import { hide_element, hp_stat, clear_element} from "./Element.js";
+
 
 export class Game {
     round;
@@ -17,18 +19,21 @@ export class Game {
         this.local_storage = new History();
         this.local_storage.get_history();
         this.round = 1;
+
         document.getElementById("name1").addEventListener("keyup", () => {
             const name = document.getElementById("name1").value;
             this.player_one.set_name(name);
             document.getElementById("ability_p1_name").innerHTML = this.player_one.name;
             document.getElementById("p1_initiative").innerHTML = this.player_one.name;
         });
+
         document.getElementById("name2").addEventListener("keyup", () => {
             const name = document.getElementById("name2").value;
             this.player_two.set_name(name);
             document.getElementById("ability_p2_name").innerHTML = this.player_two.name;
             document.getElementById("p2_initiative").innerHTML = this.player_two.name;
         });
+
         document.getElementById("round").innerHTML = this.round;
 
         document.getElementById("id_rogue_button1").addEventListener("click", () => {
@@ -54,179 +59,119 @@ export class Game {
         });
         document.getElementById("player_two_ini_button").addEventListener("click", () => {
             this.show_ini("player_two");
-        })
-        this.round = new Counter(this.player_one,this.player_two,this.local_storage);
-    //nächstes mal, elementsbyclassname bei selben funktionen vlt 
-        document.getElementById("p1_sneak_attack").addEventListener("click", () => {
-            this.activate_player();
-            this.player_one.sneak_attack();
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
         });
-        document.getElementById("p1_dagger").addEventListener("click", () => {
-            this.activate_player();
-            this.player_one.dagger(this.player_two);
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
+
+        this.round = new Counter(this.player_one,this.player_two,this.local_storage);
+
+        const players = [
+            "player_one",
+            "player_two",
+        ];
+
+        const abilities = [
+            "sneak_attack",
+            "shield_block",
+            "potion",
+            "mirrors"
+        ];
+
+        const target_abilities = [
+            "fireball",
+            "magic_missile",
+            "sword",
+            "dagger"
+        ];
+
+        const test_mapping = {
+            "player_one": "p1",
+            "player_two": "p2",
+        };
+
+        const class_names = [
+            "mage",
+            "rogue",
+            "warrior"
+        ];
+
+        players.forEach((player) => {
+            abilities.forEach((ability) => {
+                if (ability === "potion") {
+                    class_names.forEach((name) => {
+                        const potion_element = document.getElementById(`${test_mapping[player]}_${name}_${ability}`);
+                            if (potion_element) {
+                                    potion_element.addEventListener("click", () => {  
+                                this[player][ability](player);
+                                potion_element.style.visibility = "hidden";
+                                });
+                            }
+                        });
+                    } else {
+                    const ability_element = document.getElementById(`${test_mapping[player]}_${ability}`);
+                    if (ability_element) {            
+                        ability_element.addEventListener("click", () => {  
+                            this[player][ability](player);
+                        });      
+                    target_abilities.forEach((ability_target) => {
+                        const ability_element_target = document.getElementById(`${test_mapping[player]}_${ability_target}`);
+                        let target = player === "player_one" ? "player_two" : "player_one";
+                        let target_string = `"${target}"`;
+                        console.log(target,ability_target,player,target_string)
+                        ability_element_target.addEventListener("click", () => {  
+                            this[player][ability_target](target, target_string);
+                        });
+                    });
+                    } else {
+                        console.warn(`HTMLElement with ID ${test_mapping[player]}_${ability} not found.`);
+                    }  
+                }
+            });
+        });
+
+        document.getElementById("p1_sword").addEventListener("click", () => {  
+            this.player_one.sword(this.player_two,"player_two");
+        });
+        document.getElementById("p1_sword").addEventListener("click", () => {  
+            this.player_two.sword(this.player_one,"player_one");
+        });
+        document.getElementById("p1_dagger").addEventListener("click", () => {  
+            this.player_one.dagger(this.player_two, "player_two");
         });
         document.getElementById("p1_dirt").addEventListener("click", () => {
-            this.activate_player();
-            this.player_one.dirty(this.player_two);
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
-        });
-        document.getElementById("p1_rogue_potion").addEventListener("click", () => {
-            this.player_one.potion();
-            this.activate_player();
-            document.getElementById("p1_rogue_potion").style.visibility = "hidden";
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
+            this.player_one.dirty(this.player_two, "player_two");
         });
         document.getElementById("p1_fireball").addEventListener("click", () => {
-            this.activate_player();
-            this.player_one.fireball(this.player_two);
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();  
+            this.player_one.fireball(this.player_two, "player_two");  
         });
-        document.getElementById("p1_magic_missile").addEventListener("click", () => {
-            this.activate_player();
-            this.player_one.magic_missile(this.player_two);
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
-        });
-        document.getElementById("p1_mage_potion").addEventListener("click", () => {
-            this.player_one.potion();
-            this.activate_player();
-            document.getElementById("p1_mage_potion").style.visibility = "hidden";
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
-        });
-        document.getElementById("p1_sword").addEventListener("click", () => {
-            this.activate_player();
-            this.player_one.sword(this.player_two);
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
-        });
-        document.getElementById("p1_shield_block").addEventListener("click", () => {
-            this.activate_player();
-            this.player_one.shield_block();
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
-            
-        });
-        document.getElementById("p1_warrior_potion").addEventListener("click", () => {
-            this.player_one.potion();
-            this.activate_player();
-            document.getElementById("p1_warrior_potion").style.visibility = "hidden";
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
-        });
-        document.getElementById("p1_mirrors").addEventListener("click", () => {
-            this.activate_player();
-            this.player_one.mirrors();
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
-        });
-        document.getElementById("p2_rogue_potion").addEventListener("click", () => {
-            this.player_two.potion();
-            this.activate_player();
-            document.getElementById("p2_rogue_potion").style.visibility = "hidden";
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
-        });
-        document.getElementById("p2_sneak_attack").addEventListener("click", () => {
-            this.activate_player();
-            this.player_two.sneak_attack();
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
+        document.getElementById("p1_magic_missile").addEventListener("click", () => {  
+            this.player_one.magic_missile(this.player_two,"player_two");
         });
         document.getElementById("p2_dagger").addEventListener("click", () => {
-            this.activate_player();
-            this.player_two.dagger(this.player_one);
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
-        });
-        document.getElementById("p2_mirrors").addEventListener("click", () => {
-            this.activate_player();
-            this.mirror_true();
-            this.player_two.mirrors();
-            this.hp_stat();
-            this.round.turnbased();
+            this.player_two.dagger(this.player_one, "player_one");
         });
         document.getElementById("p2_dirt").addEventListener("click", () => {
-            this.activate_player();
-            this.player_two.dirty(this.player_one);
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
-        });
-        document.getElementById("p2_mage_potion").addEventListener("click", () => {
-            this.player_two.potion();
-            this.activate_player();
-            document.getElementById("p2_mage_potion").style.visibility = "hidden";
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
+            this.player_two.dirty(this.player_one, "player_one");
         });
         document.getElementById("p2_fireball").addEventListener("click", () => {
-            this.activate_player();
-            this.player_two.fireball(this.player_one);
-            this.hp_stat();
-            this.round.turnbased();
-        });
-        document.getElementById("p2_magic_missile").addEventListener("click", () => {
-            this.activate_player();
-            this.player_two.magic_missile(this.player_one);
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
-        })
-
-        document.getElementById("p2_sword").addEventListener("click", () => {
-            this.activate_player();
-            this.player_two.sword(this.player_one);
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
-            
-        });
-        document.getElementById("p2_shield_block").addEventListener("click", () => {
-            this.activate_player();
-            this.player_two.shield_block();
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased();
-            
-        });
-        document.getElementById("p2_warrior_potion").addEventListener("click", () => {
-            this.player_two.potion();
-            this.activate_player();
-            document.getElementById("p2_warrior_potion").style.visibility = "hidden";
-            this.mirror_true();
-            this.hp_stat();
-            this.round.turnbased(); 
+            this.player_two.fireball(this.player_one, "player_one");
         });
         document.getElementById("replay").addEventListener("click", () => {
             location.reload();
             document.getElementById("highscore") = localStorage.getItem(list);
-        })
+        });
+        const ability_class = document.getElementsByClassName("ability");
+        for (let current_element of ability_class) {
+            current_element.addEventListener("click", () => {   
+                this.mirror_true();
+                hp_stat(this.player_one, this.player_two);
+                this.round.turnbased();
+                this.activate_player();
+            });
+        } 
     }
 
     mirror_true() {
+        this.player_one
+        this['player_one']
         if (this.player_one.mirror === true) {
             this.player_one.mirror_turn += 1;  
             if (this.player_one.mirror_turn >= 4) {
@@ -240,11 +185,6 @@ export class Game {
                 this.player_two.mirror = false; 
             }
         }
-    }
-
-    hp_stat() {
-        document.getElementById("show_player_one_hp").innerHTML = this.player_one.hp;
-        document.getElementById("show_player_two_hp").innerHTML = this.player_two.hp;
     }
 
     choose_class(player,player_class) {
@@ -268,8 +208,6 @@ export class Game {
         if (player === "1") {
             if (player_class === "rogue") {
                 this.player_one = new Rogue();
-                document.getElementById("dirty_commentary_visibility2").innerHTML= "dirt status";
-                document.getElementById("sneaky_commentary_visibility2").innerHTML= "sneak attack status";
             } else if (player_class === "mage") {
                 this.player_one = new Mage();
             }
@@ -284,8 +222,6 @@ export class Game {
         if (player === "2") {
             if (player_class === "rogue") {
                 this.player_two = new Rogue();
-                document.getElementById("dirty_commentary_visibility").innerHTML = "dirt status";
-                document.getElementById("sneaky_commentary_visibility").innerHTML = "sneak attack status";
             }
             else if (player_class === "mage") {
                 this.player_two = new Mage();
@@ -310,25 +246,26 @@ export class Game {
             } 
         }
     }
+
     show_ini(player) {
-        let ability_one_player = `ability_p1_${this.player_one.type}`;
-        let ability_two_player = `ability_p2_${this.player_two.type}`;
         if (player === "player_one") {
             document.getElementById("player_one_ini_result").innerHTML = this.player_one.initiative;
         }
         else if (player === "player_two") {
+            if (this.player_two.initiative === this.player_one.initiative) {
+                this.player_two.initiative -=1 }
             document.getElementById("player_two_ini_result").innerHTML = this.player_two.initiative;
             this.first_strike();
             if (this.player_two.initiative < this.player_one.initiative) {
-                document.getElementById("p2_sneak_attack").style.display = "none";
+                hide_element("p2_sneak_attack");
                 this.active_player = this.player_one;
-                document.getElementById(ability_two_player).style.display = "none";
+                this.activate_player();
             }
             if (this.player_two.initiative > this.player_one.initiative) {
-                document.getElementById("p1_sneak_attack").style.display = "none";
+                hide_element("p1_sneak_attack");
                 this.active_player = this.player_two;
-                document.getElementById(ability_one_player).style.display = "none";
-            }
+                this.activate_player();
+            } 
         }
     }
 
@@ -336,12 +273,12 @@ export class Game {
         let ability_one_player = `ability_p1_${this.player_one.type}`;
         let ability_two_player = `ability_p2_${this.player_two.type}`;
         if (this.active_player === this.player_one) {
-            document.getElementById(ability_one_player).style.display = "none";
-            document.getElementById(ability_two_player).style.display = "";
+            hide_element(ability_two_player);
+            document.getElementById(ability_one_player).style.visibility = "visible";
             this.active_player = this.player_two;
         } else {
-            document.getElementById(ability_one_player).style.display = "";
-            document.getElementById(ability_two_player).style.display = "none";
+            document.getElementById(ability_two_player).style.visibility = "visible";
+            hide_element(ability_one_player);
             this.active_player = this.player_one;
         }
     }

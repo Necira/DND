@@ -1,7 +1,7 @@
 
-* {
-    text-align:center;
-    background-color: white;
+h1 {
+    text-align: center;
+    margin: 10px;
 }
 
 .ability_p1,.ability_p2 {
@@ -12,7 +12,11 @@
     display: flex;
 }
 .chose_fighter {
-    text-align:center;
+    text-align: center;
+}
+
+.round_style {
+    display: flex;
 }
 
 #pictures1, #pictures2 {
@@ -21,70 +25,63 @@
 }
 
 #announcement {
-    color:red;
-    font-size:50px;
+    color: red;
+    font-size: 50px;
 
 }
 .initiative {
-    text-align: center;
-    font-display: center;
-    font-size:15px;
+    font-size: 15px;
     visibility: hidden;
+    font-display: left
 }
 .player_one_initiative {
     font-size: 20px;
-    font-display: center;
     color: brown;
+    display: flex;
     
 }
 
 .player_two_initiative{ 
     font-size: 20px;
-    font-display: center;
-    color:green;
+    color: green;
+    display: flex;
 }
 
 #initiative_result {
-    text-align:center;
+    text-align: center;
 }
 
 
 .buttons_rogue, .buttons_mage, .buttons_warrior {
-    text-align:center;
+    text-align: center;
 }
 
 
 .rogue:hover, .mage:hover, .warrior:hover {
     opacity: 1;
     cursor: pointer;
-    border-color:brown;
+    border-color: brown;
     transform: scale(1.5);
 }
 
 .fighter1 {
-    background-color: brown;
-    border-color: green;
-    border-radius: 30%;
     color: white;
+    display: flex;
 }
 
 .fighter2 {
-    border-color: brown;
-    border-radius: 30%;
-    background: green;
-    color: white
+    display: flex;
+    color: white;
 }
 .fighter1:hover {
     opacity: 1;
     cursor: pointer;
-    border-color: brown;
     transform: scale();
 }
 
 .fighter2:hover {
     opacity: 50;
     cursor: pointer;
-    border-color: green;
     transform: scale();
 }
 
@@ -102,32 +99,51 @@
 
 #show_starting_player {
     size: 20px;
-    color: brown;
 }
 
 .ability_p1 {
-     color: brown;
-     border-color: brown;
+    display: flex;
 }
 
 .ability_p2 {
-    color: green;
-    border-color: green
+    display: flex;
 }
 
 .p1_hp {
-    color:red;
+    color: red;
 }
 
 .p1_classpick, .p2_classpick {
     display: flex;
     flex-direction: row;
-    margin: 5px;
+    margin: 60px;
+}
+
+#commentary1, #commentary2 {
+    border: 2px solid #000000;
+    margin: 5px auto;
+    padding: 2px;
+    box-sizing: border-box;
+}
+
+#feedback_player_one, #feedback_player_two {
+    color:red;
+}
+
+#history {
+    bottom: 0px;
 }
 
 .information_text {
     display: none;
     margin: 5px;
+    background-color: white;
+    top: 300px;
+    position: fixed;
+    border: 2px solid #000000;
+    margin: 50px auto;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .choose_initiative_style:has(#id_rogue_button1:hover, #id_rogue_button2:hover) + .information #rogue_information {

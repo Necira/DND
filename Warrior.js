@@ -13,13 +13,13 @@ export default class Warrior extends Character {
         this.block = false;
         this.dirt = false;
         this.damage = 0;
-        this.fireball_damage = 0;
         this.type = "warrior";
     }
     
-    sword(player) {
+    sword(target, player) {
         let mirror_luck = dice(1,2);
-        if (player.mirror === true && mirror_luck > 2) {
+        if (target.mirror === true && mirror_luck > 2) {
+            document.getElementById(`mirrors_commentary_${player}`).innerHTML = `${this.name} mirrored`
             this.damage = 0;
             this.fireball_damage = 0;
         } else {
@@ -30,26 +30,26 @@ export default class Warrior extends Character {
             if (this.dirt === true) {
                 this.damage = 0;
             }
-            player.hp -= Math.floor(this.damage);
+            target.hp -= Math.floor(this.damage);
             this.hp -= this.fireball_damage;
+            document.getElementById(`feedback_${player}`).innerHTML = `${this.name} lost ${this.damage+this.fireball_damage} hp`;
         }
         this.dirt = false;
         this.block = false;
-        document.getElementById("sneaky_commentary").innerHTML = "";
-        document.getElementById("dirty_commentary").innerHTML = "";
-        document.getElementById("dirty_commentary2").innerHTML = "";
         this.fireball_damage = 0;
     }
     
-    shield_block() {
+    shield_block(player) {
      this.block = true;
+     document.getElementById(`shieldblock_commentary_${player}`).innerHTML = `${this.name}'s shield active`
      this.hp -= this.fireball_damage;
      this.fireball_damage = 0;
     }
     
-    potion(){
+    potion(player){
         this.hp += dice(1,4);
         this.hp -= this.fireball_damage;
         this.fireball_damage = 0;
+        document.getElementById(`potion_commentary_${player}`).innerHTML = `${this.name} healed`
     }
 }

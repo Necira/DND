@@ -5,6 +5,7 @@ export class Counter {
     player_one;
     player_two;
     local_storage;
+    
     constructor(player_one,player_two,local_storage) {
         this.player_one = player_one;
         this.player_one = player_two;
